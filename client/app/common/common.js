@@ -1,12 +1,19 @@
 import angular from 'angular';
-import Navbar from './navbar/navbar';
-import Hero from './hero/hero';
-import User from './user/user';
-
+import ngCookies from 'angular-cookies';
+import Navbar from './navbar/navbar';  
+import showcurrentrouterstate from './showcurrentrouterstate/showcurrentrouterstate';  
+  import curProRouter from './router/router';   
+import authHttpModule from './authHttpModule/authHttpModule';
+import httpInterceptor from './httpInterceptor/httpInterceptor'; 
 let commonModule = angular.module('app.common', [
-  Navbar.name,
-  Hero.name,
-  User.name
-]);
+  ngCookies,
+  Navbar.name,  
+  showcurrentrouterstate.name,
+  curProRouter.name,
+  httpInterceptor.name,
+  authHttpModule.name
+])
 
+  
 export default commonModule;
+ 

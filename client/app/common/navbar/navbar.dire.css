@@ -1,0 +1,22 @@
+
+.navbar {
+    height: 6.5rem;
+   
+    padding: 2rem;
+}
+
+.nav-links .logo {
+    display: inline-block;
+}
+
+.logo {
+    color: white;
+    margin-right: 50%;
+}
+
+.nav-links span { 
+    font-size: 1.6rem;
+}
+.link-active{
+    color:red !important  ;
+}

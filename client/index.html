@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="utf-8">
     <title>NG6-Starter by @AngularClass</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,13 +11,21 @@
     <meta name="description" content="NG6-Starter by @AngularClass">
     <link rel="icon" href="data:;base64,iVBORw0KGgo=">
     <base href="/">
-  </head>
-  <body ng-app="app" ng-strict-di ng-cloak>
+    <link href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+</head>
 
-    <app>
-      Loading...
+<body>
+
+    <app   ng-strict-di ng-cloak>
+        <div>
+            <div>加载中。。。。</div>
+            <h1>兼容IE9</h1>
+            <h2>IE9是Hash路由,window.detachEvent('onresize');这个问题报错未解决</h2>
+            <h3>IE10正常路由  </h3>
+        </div>
     </app>
+    <script src="//cdn.bootcss.com/jquery/2.2.0/jquery.min.js"></script>
 
- 
-  </body>
+</body>
+
 </html>

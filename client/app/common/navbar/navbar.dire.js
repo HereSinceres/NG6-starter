@@ -1,14 +1,14 @@
-import template from './navbar.html';
-import './navbar.css';
+import template from './navbar.dire.html';
+import './navbar.dire.css';
 //Menu文件注意事项
 //1、State只在topItems里有
 //2、当路由改变是获取路由State改变当前Menu的样式
 //3、从menu变量中Copy的副本
 //4、Copy的副本中的所有属性控制当前页面Nav指令的显示状况（包括CSS）
 
-Directive.$inject = ['$state', '$rootScope', '$timeout','account','currentProMenu'];
+Directive.$inject = ['$state', '$rootScope', '$timeout','currentProMenu' ];
 export default 
-function Directive($state, $rootScope, $timeout,account,currentProMenu) {
+function Directive($state, $rootScope, $timeout,currentProMenu) {
     // Usage:
     //
     // Creates:
@@ -24,47 +24,9 @@ function Directive($state, $rootScope, $timeout,account,currentProMenu) {
     };
     return directive;
 
-    function link(scope, element, attrs) {   
-        //var menu=[
-        //    { 
-        //        text:'我的首页2',
-        //        hasSubItems:false, 
-        //        topItems:[
-        //            {
-        //                text:'我的首页',
-        //                state:'home'
-        //            } 
-        //        ]
-        //    },
-        //    { 
-        //        text:'直播',
-        //        hasSubItems:true,isShowSubItems:false,
-        //        subItems:[
-        //            { 
-        //                text:'直播频道',
-        //                topItems:[ 
-        //                    {
-        //                        text:'直播概况',
-        //                        state:'liveSum'
-        //                    } ,
-        //                    {
-        //                        text:'直播时期分析',
-        //                        state:'liveAnaly'
-        //                    }  
-                        
-        //                ]},
-        //                { 
-        //                    text:'频道分析',
-        //                    topItems:[
-        //                    {
-        //                        text:'频道单日分析',
-        //                        state:'channelSingle', 
-        //                    }  
-        //                    ]
-        //                }
-        //        ]
-        //    }
-        //];
+    function link(scope, element, attrs) {
+        let menu=  currentProMenu;
+     
         //三级菜单
         scope.currentTopMenu={}; 
         scope.currentTopMenus=[]; 
@@ -78,7 +40,7 @@ function Directive($state, $rootScope, $timeout,account,currentProMenu) {
         }, 100);
         //状态只在topItems里有
         scope.menu=angular.copy(menu);
-        scope.toggleMenu=function(item){ 
+        scope.toggleMenu=function(item){
             item.isShowSubItems=!item.isShowSubItems; 
         } 
         //根据状态查询父级,状态只在topItems里有 
@@ -97,6 +59,7 @@ function Directive($state, $rootScope, $timeout,account,currentProMenu) {
                 } 
                 if(v.subItems){
                     v.subItems.map((subitem)=>{
+                        if(subitem.topItems){
                         subitem.topItems.map((topItem)=>{
                             if(topItem.state==state)
                             { 
@@ -106,6 +69,7 @@ function Directive($state, $rootScope, $timeout,account,currentProMenu) {
                                 scope.currentTopMenu =  topItem;
                             }
                         })
+                        }
                     })
                 }
             }) 

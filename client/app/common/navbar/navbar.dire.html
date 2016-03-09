@@ -1,0 +1,23 @@
+<div class="row">
+    <div class="col-md-6">
+        <ul>
+            <li ng-repeat="item in menu">
+                <!--如果没有子级则可以直接跳转到topMenu-->
+                <button ng-if="!item.hasSubItems" ng-click="clkMenu(item)"  ng-class="item.active">{{item.text}}</button>
+                <!--如果有子级则显示子级别内容-->
+                <button ng-if="item.hasSubItems" ng-click="toggleMenu(item)"  ng-class="item.active">{{item.text}}</button>
+                <ul ng-show='item.hasSubItems&&item.isShowSubItems'>
+                    <li ng-repeat="i in item.subItems">
+                        <button ng-click="clkMenu(i)"  ng-class="i.active">{{i.text}}</button>
+                    </li>
+                </ul>
+            </li> 
+        </ul>
+    </div>
+    <div>
+        <span ng-repeat="item in  currentTopMenus">
+            <a ng-class="item.active"  ng-click="goState(item.state)">{{item.text}}</a>
+        </span> 
+    </div>
+</div> 
+{{menu}}
