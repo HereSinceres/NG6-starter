@@ -18,6 +18,6 @@
         <span ng-repeat="item in  currentTopMenus">
             <a ng-class="item.active"  ng-click="goState(item.state)">{{item.text}}</a>
         </span> 
+        <div ui-view></div>
     </div>
-</div> 
-{{menu}}
+</div>  

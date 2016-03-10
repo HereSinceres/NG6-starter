@@ -5,12 +5,16 @@ var path = require('path');
 var webpack = require('webpack');
 
 var HtmlWebpackPlugin = require('html-webpack-plugin');
-const NODE_ENV = process.env.NODE_ENV || 'development';
+const NODE_ENV = process.env.NODE_ENV || 'production';//development
 
 module.exports = {
     entry: {
         app: [
-            "./client/app/app",  
+            "./client/app/app",
+            'webpack/hot/dev-server',//热加载需要这一句http://localhost:8080/webpack-dev-server/bundle
+        ],
+        login: [
+            "./client/login/login",
             'webpack/hot/dev-server',//热加载需要这一句http://localhost:8080/webpack-dev-server/bundle
         ]
     },
@@ -38,19 +42,32 @@ module.exports = {
         new webpack.NoErrorsPlugin(),
         //手动注入文件
         new HtmlWebpackPlugin({
+            chunks: ['login','common'],
+            filename: 'login.html',
+            template: 'client/login.html',
+            inject: 'body',
+            hash: true
+        }),
+        new HtmlWebpackPlugin({
+            chunks: ['app',  'common'],
+            filename: 'index.html',
             template: 'client/index.html',
             inject: 'body',
             hash: true
-        }),  
+        }),
+
         // Automatically move all modules defined outside of application directory to vendor bundle.
         // If you are using more complicated project structure, consider to specify common chunks manually.
+        // new webpack.optimize.CommonsChunkPlugin({
+        //     name: 'vendor',
+        //     filename: "vendor.js",
+        //     minChunks: function(module, count) {
+        //         return module.resource && module.resource.indexOf(path.resolve(__dirname, 'client')) === -1;
+        //     }
+        // }),  
         new webpack.optimize.CommonsChunkPlugin({
-            name: 'vendor',
-            filename: "vendor.js",
-            minChunks: function (module, count) {
-                return module.resource && module.resource.indexOf(path.resolve(__dirname, 'client')) === -1;
-            }
-        }), 
+            name: "common" 
+        }),
         // Adds webpack HMR support. It act's like livereload,
         // reloading page after webpack rebuilt modules.
         // It also updates stylesheets and inline assets without page reloading.
@@ -78,7 +95,7 @@ if (NODE_ENV == 'production') {
                 drop_console: true,
                 unsafe: true,
             },
-            mangle: { 
+            mangle: {
                 // You can specify all variables that should not be mangled.
                 // For example if your vendor dependency doesn't use modules
                 // and relies on global variables. Most of angular modules relies on
@@ -86,7 +103,7 @@ if (NODE_ENV == 'production') {
                 except: ['$super', '$', 'exports', 'require', 'angular']
             }
         })
-        );
+    );
 }
 
 

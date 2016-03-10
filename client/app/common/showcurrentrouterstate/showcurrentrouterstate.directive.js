@@ -11,7 +11,7 @@ function Directive($state,showcurrentrouterstateServ,smgLocalityService) {
         controllerAs: 'vm',
         link: link,
         restrict: 'AE',
-        template: "<div>{{linkvalue}} </div>",
+        template: "<div>{{linkvalue}} 这里是内容</div>",
         scope: {
         }
     };
